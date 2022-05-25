@@ -1,0 +1,25 @@
+services:
+  react:
+    image: react-zhole
+    build: 
+      context: ./react-zhole
+    volumes:
+      - vol01:/res
+  
+  nginx:
+    image: nginx-zhole
+    build:
+      context: ./nginx-zhole
+    networks: 
+      - nginx
+    ports:
+      - "80:80"
+    volumes:
+      - vol01:/res
+
+networks: 
+  react:
+  nginx:
+
+volumes:
+  vol01:
