@@ -1,0 +1,74 @@
+services:
+  # react:
+  #   image: react-zhole
+  #   build: 
+  #     context: ./react-zhole
+  #   volumes:
+  #     - vol01:/res
+  
+  nginx-z:
+    image: nginx-zhole
+    build: 
+      context: ./nginx-zhole
+    container_name: nginx-z
+    restart: unless-stopped
+    network_mode: host
+    labels:
+      - "nginx-z"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      # - /etc/nginx/www/html:/var/www/html
+      # - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - /etc/nginx/conf.d:/etc/nginx/conf.d
+      # - /etc/nginx/ssl:/etc/nginx/ssl
+      # - /etc/nginx/logs:/var/log/nginx
+ 
+  # acme-rsa:
+  #   image: neilpang/acme.sh
+  #   container_name: acme-rsa
+  #   restart: unless-stopped
+  #   environment:
+  #     CF_Account_ID: "61e0213c394ccd054c8f808a13973d9b"
+  #     CF_Token: "8czubwLH0dRgxjlFD9FfzWd5NGy9yUJFQ3LHcG_O"
+  #     DEPLOY_DOCKER_CONTAINER_LABEL: "nginx-z"
+  #     DEPLOY_DOCKER_CONTAINER_KEY_FILE: "/etc/nginx/ssl/all.zstuhole.com/zstuhole.com.key"
+  #     DEPLOY_DOCKER_CONTAINER_FULLCHAIN_FILE: "/etc/nginx/ssl/all.zstuhole.com/fullchain.cer"
+  #     DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: "nginx -s reload"
+  #   volumes:
+  #     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /etc/nginx/acme.sh:/acme.sh
+  #     - /etc/nginx/ssl:/etc/nginx/ssl
+  #   command: daemon
+  # # 首次运行先进入容器生成证书
+  # # docker exec -i acme-rsa acme.sh --issue --dns dns_cf -d zstuhole.com -d *.zstuhole.com
+  # # 然后部署证书到制定文件夹
+  # # acme.sh --deploy -d zstuhole.com --deploy-hook docker
+  # # docker exec -i acme-rsa acme.sh --deploy -d zstuhole.com --deploy-hook docker
+ 
+ 
+  # acme-ecc:
+  #   image: neilpang/acme.sh
+  #   container_name: acme-ecc
+  #   restart: unless-stopped
+  #   environment:
+  #     CF_Account_ID: "61e0213c394ccd054c8f808a13973d9b"
+  #     CF_Token: "8czubwLH0dRgxjlFD9FfzWd5NGy9yUJFQ3LHcG_O"
+  #     DEPLOY_DOCKER_CONTAINER_LABEL: "nginx-z"
+  #     DEPLOY_DOCKER_CONTAINER_KEY_FILE: "/etc/nginx/ssl/all.zstuhole.com.ecc/zstuhole.com.key"
+  #     DEPLOY_DOCKER_CONTAINER_FULLCHAIN_FILE: "/etc/nginx/ssl/all.zstuhole.com.ecc/fullchain.cer"
+  #     DEPLOY_DOCKER_CONTAINER_RELOAD_CMD: "nginx -s reload"
+  #   volumes:
+  #     - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /etc/nginx/acme.sh.ecc:/acme.sh
+  #     - /etc/nginx/ssl:/etc/nginx/ssl
+  #   command: daemon
+  #   # 首次运行先进入容器生成证书
+  #   # acme.sh --issue --dns dns_cf -d zstuhole.com -d *.zstuhole.com
+  #   # 第一次需要用自己的邮箱注册 
+  #   # docker exec -i acme-ecc acme.sh --register-account -m zoy283@outlook.com
+  #   # docker exec -i acme-ecc acme.sh --issue --dns dns_cf -d zstuhole.com -d *.zstuhole.com --keylength ec-256
+  #   # 然后部署证书到指定文件夹
+  #   # acme.sh --deploy -d zstuhole.com --deploy-hook docker
+  #   # docker exec -i acme-ecc acme.sh --deploy -d zstuhole.com --ecc --deploy-hook docker
