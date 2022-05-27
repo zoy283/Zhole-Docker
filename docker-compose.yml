@@ -6,15 +6,15 @@ services:
   #   volumes:
   #     - vol01:/res
   
-  nginx-z:
+  nginx-zhole:
     image: nginx-zhole
     build: 
       context: ./nginx-zhole
-    container_name: nginx-z
+    container_name: nginx-zhole
     restart: unless-stopped
     network_mode: host
     labels:
-      - "nginx-z"
+      - "nginx-zhole"
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       # - /etc/nginx/www/html:/var/www/html
