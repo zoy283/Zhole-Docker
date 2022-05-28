@@ -1,3 +1,6 @@
 [submodule "react-zhole"]
 	path = react-zhole
 	url = https://github.com/zoy283/react-zhole.git
+[submodule "backend-zhole"]
+	path = treehollow-v3-backend
+	url = https://github.com/zoy283/backend-zhole.git
