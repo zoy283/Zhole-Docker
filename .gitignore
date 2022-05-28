@@ -1,2 +1,3 @@
 /nginx-zhole/build/
 /nginx-zhole/*.conf
+*.sh
